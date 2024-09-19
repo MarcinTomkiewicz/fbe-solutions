@@ -1,0 +1,30 @@
+.navbar {
+    background-color: $primary-color;
+    
+    .navbar-brand {
+      padding-left: 1rem;
+      color: $text-color;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  
+    .navbar-nav {
+      display: flex;
+      list-style: none;
+      @include flex-wrapper(row);
+  
+      li {
+        margin-right: 2rem;
+  
+        a {
+          color: $text-color;
+          font-weight: bold;
+          text-decoration: none;
+          
+          &:hover {
+            color: $secondary-color;
+          }
+        }
+      }
+    }
+  }

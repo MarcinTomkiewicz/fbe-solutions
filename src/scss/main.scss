@@ -1,0 +1,67 @@
+// Abstracts
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+// Base
+@import "base/reset";
+@import "base/typography";
+@import "base/base";
+
+// Components
+@import "components/buttons";
+@import "components/navbar";
+
+// Layouts
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/grid";
+@import "layouts/main";
+
+// Vendors (Bootstrap)
+@import "bootstrap/scss/bootstrap"; // Import Bootstrap SCSS
+@import "vendors/bootstrap";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+  margin: 0; /* Usuń domyślny margines */
+  padding: 0; /* Usuń domyślny padding */
+  overflow-x: hidden; /* Ukryj poziomy scrollbar */
+  font-family: "Bebas Neue", sans-serif; /* Ustawienia fontu */
+  background-color: #f5f5f5; /* Kolor tła */
+  color: #333; /* Kolor tekstu */
+  margin-left: 20px;
+  margin-right: 20px; 
+}
+
+/* Resetowanie niechcianych stylów dla wszystkich elementów */
+* {
+  box-sizing: border-box; /* Upewnij się, że padding i border są wliczane w rozmiar elementu */
+}
+
+/* Linki */
+a {
+  text-decoration: none; /* Usuń podkreślenia */
+  color: inherit; /* Kolor taki sam jak kolor tekstu */
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken(
+      $primary-color,
+      10%
+    ); /* Przyciemnienie koloru podczas hover */
+  }
+}
+
+/* Przyciski */
+button {
+  cursor: pointer; /* Kursor zmienia się na wskaźnik */
+}
+
+.flex-row-default {
+  @include flex-wrapper(row);
+}
+
+.flex-column-default {
+  @include flex-wrapper(column);
+}
