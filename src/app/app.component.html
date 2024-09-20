@@ -1,29 +1,8 @@
 <app-header></app-header>
 <app-navbar></app-navbar>
-<app-main></app-main>
-<div ngbScrollspy="scrollspy" (activate)="onActivate($event)">
-    <div id="about" style="height: 100vh;">
-      <ng-container *ngIf="activeSection === 'about'">
-        <app-about></app-about>
-      </ng-container>
-    </div>
-  
-    <div id="services" style="height: 100vh;">
-      <ng-container *ngIf="activeSection === 'services'">
-        <app-services></app-services>
-      </ng-container>
-    </div>
-  
-    <div id="portfolio" style="height: 100vh;">
-      <ng-container *ngIf="activeSection === 'portfolio'">
-        <app-portfolio></app-portfolio>
-      </ng-container>
-    </div>
-  
-    <div id="contact" style="height: 100vh;">
-      <ng-container *ngIf="activeSection === 'contact'">
-        <app-contact></app-contact>
-      </ng-container>
-    </div>
-  </div>
+<app-main id="" [navigateToServices]="navigateToServices"></app-main>
+<app-about id="about"></app-about>
+<app-services #services id="services"></app-services>
+<app-portfolio id="portfolio"></app-portfolio>
+<app-contact id="contact"></app-contact>
 <app-footer></app-footer>

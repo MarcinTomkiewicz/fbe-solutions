@@ -14,7 +14,15 @@
   justify-content: center;
   align-items: center;
   max-width: 50%;
-  
+  height: 100%;
+  background: 
+    /* Gradienty na krawędziach */
+    linear-gradient(to right, rgba(255,255,255,0) 82%, $primary-color 90%),
+    linear-gradient(to left,  rgba(255,255,255,0) 82%, $primary-color 90%),
+    url('../../../../public/man3.jpeg') center/contain no-repeat;
+    
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
   .cta-button {
     background-color: $secondary-button-color;
     color: $text-color;

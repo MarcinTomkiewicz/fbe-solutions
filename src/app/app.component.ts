@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NgbScrollSpyModule } from '@ng-bootstrap/ng-bootstrap';
+import { AfterViewInit, Component, ElementRef, inject, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -9,13 +7,13 @@ import { AboutComponent } from './components/about/about.component';
 import { ServicesComponent } from './components/services/services.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { WindowRef } from './core/services/window-ref';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     FooterComponent,
     MainComponent,
@@ -25,37 +23,59 @@ import { CommonModule } from '@angular/common';
     ServicesComponent,
     PortfolioComponent,
     ContactComponent,
-    NgbScrollSpyModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'FBE Solutions';
 
-  activeSection: string = 'main';
+  windowRef = inject(WindowRef);
+  document: Document = inject(DOCUMENT);
+  platformId = inject(PLATFORM_ID)
+  
+  constructor( ) {}
 
-  // Obsługa aktywacji sekcji Scrollspy
-  onActivate(event: any) {
-    const activeLinkId = event.relatedTarget.id; // Pobieramy ID aktywnego linku
-    console.log(event);
-    
+  @ViewChild('services') services!: ElementRef;
+  
+  ngAfterViewInit() {
+    this.observeSections();
+    setTimeout(() => {
+      
+    });
+  }
 
-    switch (activeLinkId) {
-      case 'about-link':
-        this.activeSection = 'about';
-        break;
-      case 'services-link':
-        this.activeSection = 'services';
-        break;
-      case 'portfolio-link':
-        this.activeSection = 'portfolio';
-        break;
-      case 'contact-link':
-        this.activeSection = 'contact';
-        break;
-      default:
-        this.activeSection = 'about'; // Sekcja domyślna, np. O mnie
+  navigateToServices() {
+    if (this.services) {
+      this.services.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.error('Services element is undefined');
+    }
+  }
+
+  private observeSections() {
+    if (isPlatformBrowser(this.platformId)) {
+      const sections = this.document.querySelectorAll(
+        'app-about, app-services, app-portfolio, app-contact, app-main'
+      );
+
+      const observerOptions = {
+        root: null, // viewport
+        threshold: 0.5, // 50% widoczności
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const window = this.windowRef.nativeWindow;
+            if (!window) return;
+            window.history.pushState(null, '', `#${id}`);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
     }
   }
 }

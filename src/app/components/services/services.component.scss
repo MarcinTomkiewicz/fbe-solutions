@@ -1,4 +1,39 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
 :host {
     display: block;
     height: 100%; /* Wysokość 100% rodzica (main) */
+  }
+
+  .intro-section {
+    margin-bottom: 20px;
+}
+
+.component-container {
+    height: 100%;
+    @include flex-wrapper(column);
+}
+
+.section-title {
+    font-size: 2rem;
+    color: $secondary-color!important;
+    margin-bottom: 10px;
+}
+
+.disclaimer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: $secondary-color;
+}
+
+.image-banner-container {
+    width: 100%;
+}
+
+.image-banner {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    object-position: 0 30%;
   }
