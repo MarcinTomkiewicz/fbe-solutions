@@ -1,3 +1,4 @@
 main {
-    min-height: 64vh;
+    min-height: calc(100vh - 264px - 62px);
+    padding: 2rem;
 }

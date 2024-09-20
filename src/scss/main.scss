@@ -16,6 +16,7 @@
 @import "layouts/footer";
 @import "layouts/grid";
 @import "layouts/main";
+@import "layouts/div";
 
 // Vendors (Bootstrap)
 @import "bootstrap/scss/bootstrap"; // Import Bootstrap SCSS
@@ -28,10 +29,8 @@ body {
   padding: 0; /* Usuń domyślny padding */
   overflow-x: hidden; /* Ukryj poziomy scrollbar */
   font-family: "Bebas Neue", sans-serif; /* Ustawienia fontu */
-  background-color: #f5f5f5; /* Kolor tła */
-  color: #333; /* Kolor tekstu */
-  margin-left: 20px;
-  margin-right: 20px; 
+  background-color: $bg-color;
+  color: $text-color;
 }
 
 /* Resetowanie niechcianych stylów dla wszystkich elementów */

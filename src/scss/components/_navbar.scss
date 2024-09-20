@@ -2,8 +2,7 @@
     background-color: $primary-color;
     
     .navbar-brand {
-      padding-left: 1rem;
-      color: $text-color;
+      padding-left: 2rem;
       font-size: 1.5rem;
       font-weight: bold;
     }
@@ -17,12 +16,10 @@
         margin-right: 2rem;
   
         a {
-          color: $text-color;
-          font-weight: bold;
           text-decoration: none;
           
           &:hover {
-            color: $secondary-color;
+            color: $secondary-text-color;
           }
         }
       }

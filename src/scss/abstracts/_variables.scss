@@ -1,11 +1,13 @@
 $primary-color: #F4B500;
 $secondary-color: #808080;
-$bg-color: #FFFFFF;
+$bg-color: #F5F5F5;
 $secondary-bg-color: #000000;
 $text-color: #000000;
-$secondary-text-color: #FFFFFF;
+$secondary-text-color: #F5F5F5;
 $button-color: #F4B500;
 $button-hover-color: darken($button-color, 10%);
+$secondary-button-color: #F5F5F5;
+$secondary-button-hover-color: darken($secondary-button-color, 10%);
 $border-color: #E0E0E0;
 
 // Typography
