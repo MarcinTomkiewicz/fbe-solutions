@@ -1,3 +1,19 @@
+body {
+  font-size: $font-size-base;
+}
+
+@media (max-width: $breakpoint-sm) {
+  body {
+    font-size: $font-size-sm;
+  }
+}
+
+@media (min-width: $breakpoint-lg) {
+  body {
+    font-size: $font-size-lg;
+  }
+}
+
 ::-webkit-scrollbar {
     width: 12px;
     background-color: $bg-color;
@@ -21,4 +37,21 @@
   * {
     scrollbar-color: $primary-color $secondary-bg-color;
     scrollbar-width: thin;
+  }
+
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: $breakpoint-sm) {
+    .container {
+      width: $container-width-md;
+    }
+  }
+  
+  @media (min-width: $breakpoint-lg) {
+    .container {
+      width: $container-width-lg;
+    }
   }

@@ -14,3 +14,16 @@ $border-color: #E0E0E0;
 $font-family-base: 'Arial', sans-serif;
 $font-size-base: 1rem;
 $line-height-base: 1.5;
+$font-size-sm: 0.875rem;  // for small screens
+$font-size-lg: 1.125rem;  // for large screens
+
+// Breakpoints
+$breakpoint-xs: 480px;   // for mobile devices
+$breakpoint-sm: 768px;   // for tablets
+$breakpoint-md: 1024px;  // for small desktops
+$breakpoint-lg: 1200px;  // for larger desktops
+
+// Container widths
+$container-width-sm: 100%;  // full width for mobile
+$container-width-md: 960px; // for tablets
+$container-width-lg: 1140px; // for desktops

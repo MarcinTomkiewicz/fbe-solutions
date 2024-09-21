@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { WindowRef } from '../../core/services/window-ref';
 
@@ -10,6 +10,8 @@ import { WindowRef } from '../../core/services/window-ref';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+  showMore = false;
+  isLargeScreen = true;
   
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -19,6 +21,11 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkHash();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isLargeScreen = window.innerWidth >= 481;    
   }
 
   private checkHash() {
@@ -32,5 +39,11 @@ export class AboutComponent implements OnInit {
         }
       }
     }
+  }
+ 
+  toggleShowMore() {
+    this.showMore = !this.showMore;
+    console.log(this.isLargeScreen || !this.showMore, window.innerWidth, this.isLargeScreen, !this.showMore);
+    
   }
 }

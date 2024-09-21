@@ -16,3 +16,10 @@ header {
       color: $secondary-text-color;
     }
   }
+
+  @media (max-width: $breakpoint-sm) {
+    .header {
+      padding: 10px;
+      background-color: $secondary-bg-color;
+    }
+  }

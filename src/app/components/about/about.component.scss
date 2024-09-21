@@ -1,11 +1,22 @@
 @import "abstracts/variables";
+@import "abstracts/mixins";
 
 :host {
-  display: flex; /* Flexbox do podziału na kolumny */
-  height: 100%; /* Zajmuje całą wysokość widocznego ekranu */
+  @include flex-wrapper(row);
+  height: 100vh;
   background-color: $primary-color;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Lekki cień dla głębi */
-  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+
+  @media (max-width: $breakpoint-md) {
+    flex-flow: column-reverse;
+    // flex-direction: column;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    // flex-direction: column;
+    height: 100%;
+  }
 }
 
 .cta-container {
@@ -15,14 +26,22 @@
   align-items: center;
   max-width: 50%;
   height: 100%;
-  background: 
-    /* Gradienty na krawędziach */
-    linear-gradient(to right, rgba(255,255,255,0) 82%, $primary-color 90%),
-    linear-gradient(to left,  rgba(255,255,255,0) 82%, $primary-color 90%),
-    url('../../../../public/man3.jpeg') center/contain no-repeat;
-    
-  mask-composite: intersect;
-  -webkit-mask-composite: destination-in;
+  background: url('../../../../public/man3.jpeg') center/cover no-repeat; /* Obrazek jako banner */
+  
+  @media (max-width: $breakpoint-md) {
+    max-width: unset;
+    width: 100%;
+    height: 100px; /* Zmniejszenie wysokości na średnich ekranach */
+    flex: unset;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: unset;
+    width: 100%;
+    height: 100px; /* Jeszcze mniejsze wysokości na małych ekranach */
+    flex: unset;
+  }
+
   .cta-button {
     background-color: $secondary-button-color;
     color: $text-color;
@@ -39,19 +58,14 @@
     &:hover {
       background-color: $secondary-button-hover-color;
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-      border-radius: 5px;
       transform: scale(1.05) translateY(-5px);
       transition: all 0.4s ease;
     }
-  }
-}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    @media (max-width: $breakpoint-xs) {
+      font-size: 1rem;
+      padding: 0.8rem 1.5rem;
+    }
   }
 }
 
@@ -59,11 +73,12 @@
   flex: 1;
   max-width: 50%;
   margin-left: auto;
-  line-height: 1.6;
   padding: 2rem;
+  line-height: 1.6;
   border-radius: 8px;
   background-color: $primary-color;
   transition: all 0.3s ease;
+  overflow: hidden; /* Zapewnia, że treść nie wychodzi poza kontener */
 
   p {
     font-size: 1.3rem;
@@ -71,7 +86,7 @@
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeIn 0.5s forwards;
-    
+
     &:nth-of-type(1) {
       animation-delay: 0.3s;
     }
@@ -81,10 +96,35 @@
     &:nth-of-type(3) {
       animation-delay: 0.9s;
     }
-   
     &:last-child {
       animation-delay: 1.2s;
       margin-bottom: 0;
+    }
+  }
+
+  /* Zmniejsz rozmiar czcionki na średnich ekranach */
+  @media (max-width: $breakpoint-md) {
+    max-width: 100%; /* Rozszerzenie kontenera */
+    padding: 0;
+    padding-top: 1rem;
+    margin: 0;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    p {
+      font-size: $font-size-sm;
+    }
+  }
+
+  /* Ogranicz liczbę widocznych paragrafów na mniejszych ekranach */
+  @media (max-width: $breakpoint-xs) {
+    max-width: 100%;
+    padding: 1rem;
+
+    /* Ukryj ostatnie dwa paragrafy na małych ekranach */
+    p:nth-of-type(3),
+    p:nth-of-type(4) {
+      display: none;
     }
   }
 
@@ -103,16 +143,42 @@
     transform: scale(1.05) translateY(-5px);
     background-color: darken($primary-color, 5%);
     transition: all 0.4s ease;
+    @media (max-width: $breakpoint-sm) {
+      all: unset
+    }
   }
 
-    &:hover p {
+  &:hover p {
     color: lighten($text-color, 10%);
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    @media (max-width: $breakpoint-sm) {
+      all: unset
+    }
   }
 
-    &:hover p:first-of-type::first-letter {
+  &:hover p:first-of-type::first-letter {
     color: lighten($secondary-color, 15%);
     transform: rotate(-5deg) scale(1.1);
     transition: transform 0.3s ease, color 0.3s ease;
+    @media (max-width: $breakpoint-sm) {
+      all: unset
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.show-more {
+  display: none;
+
+  @media(max-width: $breakpoint-sm) {
+    display: block;
   }
 }
