@@ -98,9 +98,11 @@
         <textarea
           id="message"
           formControlName="message"
-          class="form-control  responsive-textarea"
+          class="form-control responsive-textarea"
           rows="5"
           required
+          (click)="openModal()"
+          readonly
         ></textarea>
         <div
           *ngIf="
