@@ -3,7 +3,7 @@
 </div>
 
 <div class="about-container">
-  <p *ngIf="isLargeScreen || !showMore">
+  <div class="about-paragraph">
     Jestem doświadczonym programistą front-end, z głównym naciskiem na rozwój
     aplikacji w Angularze oraz technologiach związanych z JavaScriptem i
     TypeScript. Posiadam solidne wieloletnie doświadczenie w pracy nad złożonymi
@@ -12,29 +12,26 @@
     React. Zajmuję się również integracją z systemami zewnętrznymi oraz dbając o
     wydajność aplikacji i czystość kodu, aby z łatwością kontynuować rozwijanie
     projektów.
-  </p>
-  <p *ngIf="isLargeScreen || !showMore">
+  </div>
+  <div class="about-paragraph">
     Moje doświadczenie obejmuje także zadania związane z zarządzaniem
     infrastrukturą i wdrażaniem rozwiązań chmurowych na platformach takich jak
     AWS i Azure. Aktualnie poszerzam swoje kompetencje w zakresie technologii
     back-endowych, w szczególności C# i Java (Spring), a także gotowych
     rozwiązań backendowych, takich jak Strapi, Google Firebase i inne.
-  </p>
-  <p *ngIf="isLargeScreen || showMore">
+  </div>
+  <div class="about-paragraph">
     Pracowałem również jako specjalista Service Desk oraz doradca klienta, gdzie
     zdobyłem umiejętności w zakresie profesjonalnej obsługi, rozwiązywania
     problemów technicznych oraz efektywnej komunikacji z klientami w różnych
     językach. Dzięki temu mam pewność, że mogę dostarczać wysokiej jakości
     wsparcie techniczne oraz doradztwo, co przekłada się na lepszą jakość usług
     zarówno na froncie, jak i back-endzie.
-  </p>
-  <p *ngIf="isLargeScreen || showMore">
+  </div>
+  <div class="about-paragraph">
     Dzięki tym doświadczeniom mogę zapewnić kompleksową obsługę oraz wsparcie w
     rozwoju aplikacji, dbając zarówno o techniczne aspekty kodowania, jak i o
     pełne zrozumienie potrzeb klienta.
-  </p>
+  </div>
 
 </div>
-<button class="btn btn-primary show-more align-self-start" (click)="toggleShowMore()">
-  {{ showMore ? "Mniej" : "Więcej" }}
-</button>

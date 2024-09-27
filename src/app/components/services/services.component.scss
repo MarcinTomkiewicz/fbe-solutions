@@ -6,13 +6,10 @@
     height: 100%; /* Wysokość 100% rodzica (main) */
   }
 
-  .intro-section {
-    margin-bottom: 20px;
-}
-
 .component-container {
     height: 100%;
     @include flex-wrapper(column);
+    gap: 15px;
 }
 
 .section-title {
@@ -42,4 +39,36 @@
     th.large-screens, td.large-screens {
         display: none;
     }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    .component-container {
+        font-size: smaller;
+    }
+    .image-banner {
+        width: 100%;
+        max-height: 150px;
+        object-fit: cover;
+        object-position: 0 30%;
+      }
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    .component-container {
+        font-size: x-small;
+    }
+    .section-title {
+        font-size: 1.5rem;
+        color: $secondary-color!important;
+        margin-bottom: 10px;
+    }
+    .image-banner {
+        width: 100%;
+        max-height: auto;
+        object-fit: cover;
+        object-position: 0 30%;
+      }
+      .disclaimer {
+        font-size: x-small;
+      }
   }
