@@ -6,6 +6,10 @@
     background-color: $primary-color;
   }
 
+  .responsive-textarea {
+    height: auto; /* Umożliwiamy dynamiczną wysokość */
+  }
+
   @media (max-width: $breakpoint-md) {
     .form-label {
       font-size: smaller; // Nadpisanie rozmiaru czcionki dla etykiet
@@ -15,5 +19,8 @@
       
     .form-label {
       font-size: x-small; // Nadpisanie rozmiaru czcionki dla etykiet
+    }
+    .responsive-textarea {
+      height: 60px; /* Umożliwiamy dynamiczną wysokość */
     }
   }
