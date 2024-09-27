@@ -12,8 +12,6 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap'
 })
 export class ServicesComponent {
 
-
-
   services: IServices[] = [
     {
       name: 'Wizytówka / Landing Page',

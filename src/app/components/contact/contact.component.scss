@@ -5,3 +5,9 @@
     height: 100%; /* Wysokość 100% rodzica (main) */
     background-color: $primary-color;
   }
+
+  @media (max-width: $breakpoint-md) {
+    .form-label {
+      font-size: smaller; // Nadpisanie rozmiaru czcionki dla etykiet
+    }
+  }

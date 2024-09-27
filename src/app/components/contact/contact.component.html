@@ -4,7 +4,7 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="topic" class="form-label">Temat</label>
-        <select id="topic" formControlName="topic" class="form-select">
+        <select id="topic" formControlName="topic" class="form-select form-select-sm">
           <option *ngFor="let topic of topics" [value]="topic">
             {{ topic }}
           </option>
@@ -16,7 +16,7 @@
         <input
           id="firstName"
           formControlName="firstName"
-          class="form-control"
+          class="form-control form-control-sm"
           required
         />
         <div
@@ -35,7 +35,7 @@
         <input
           id="lastName"
           formControlName="lastName"
-          class="form-control"
+          class="form-control form-control-sm"
           required
         />
         <div
@@ -51,7 +51,7 @@
 
       <div class="mb-3">
         <label for="company" class="form-label">Firma</label>
-        <input id="company" formControlName="company" class="form-control" />
+        <input id="company" formControlName="company" class="form-control form-control-sm" />
       </div>
 
       <div class="mb-3">
@@ -60,7 +60,7 @@
           id="email"
           formControlName="email"
           type="email"
-          class="form-control"
+          class="form-control form-control-sm"
           required
         />
         <div
@@ -79,7 +79,7 @@
         <input
           id="phone"
           formControlName="phone"
-          class="form-control"
+          class="form-control form-control-sm"
           required
         />
         <div
@@ -98,7 +98,7 @@
         <textarea
           id="message"
           formControlName="message"
-          class="form-control"
+          class="form-control form-control-sm"
           rows="5"
           required
         ></textarea>
