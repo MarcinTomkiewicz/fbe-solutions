@@ -7,14 +7,13 @@
   background-color: $primary-color;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  flex-direction: row-reverse;
 
   @media (max-width: $breakpoint-md) {
     flex-flow: column-reverse;
-    // flex-direction: column;
   }
 
   @media (max-width: $breakpoint-sm) {
-    // flex-direction: column;
     height: 100%;
   }
 }
@@ -75,7 +74,6 @@
   margin-left: auto;
   padding: 2rem;
   line-height: 1.6;
-  border-radius: 8px;
   background-color: $primary-color;
   transition: all 0.3s ease;
   overflow: hidden; /* Zapewnia, że treść nie wychodzi poza kontener */
@@ -139,7 +137,6 @@
 
   &:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
     transform: scale(1.05) translateY(-5px);
     background-color: darken($primary-color, 5%);
     transition: all 0.4s ease;

@@ -37,3 +37,9 @@
     object-fit: cover;
     object-position: 0 30%;
   }
+
+  @media (max-width: $breakpoint-lg) {
+    th.large-screens, td.large-screens {
+        display: none;
+    }
+  }

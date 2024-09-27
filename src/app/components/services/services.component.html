@@ -22,21 +22,21 @@
       <tr class="table-header">
         <th scope="col">Nazwa usługi</th>
         <th scope="col">Cena</th>
-        <th scope="col">Opis</th>
-        <th scope="col">Czas realizacji</th>
+        <th scope="col" class="large-screens">Opis</th>
+        <th scope="col" style="white-space: nowrap;">Czas realizacji</th>
       </tr>
     </thead>
     <tbody>
       <tr
         *ngFor="let service of services"
-        ngbTooltip="{{ service.description }}"
+        ngbTooltip="{{ service.shortDescription }}"
       >
         <td>{{ service.name }}</td>
         <td>
           {{ service.price | number }} PLN
           {{ service.priceOrMore ? "lub więcej" : "" }}
         </td>
-        <td>{{ service.description }}</td>
+        <td class="large-screens">{{ service.shortDescription }}</td>
         <td>{{ service.realisation }}</td>
       </tr>
     </tbody>

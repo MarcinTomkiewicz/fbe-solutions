@@ -2,6 +2,7 @@ export interface IServices {
     name: string;
     price: number;
     priceOrMore: boolean;
-    description: string;
+    shortDescription: string;
+    longDescription: string;
     realisation: string;
   }

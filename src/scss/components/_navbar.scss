@@ -1,3 +1,5 @@
+@import "abstracts/variables";
+
 .navbar {
     background-color: $primary-color;
     
@@ -5,18 +7,31 @@
       padding-left: 2rem;
       font-size: 1.5rem;
       font-weight: bold;
+
+      @media (max-width: $breakpoint-sm) {
+        display: none;
+      }
     }
   
     .navbar-nav {
-      display: flex;
       list-style: none;
       @include flex-wrapper(row);
-  
+      
+      @media (max-width: $breakpoint-sm) {
+        justify-content: space-around;
+        width: 100%;
+        padding-left: 2rem;
+      }
+
       li {
         margin-right: 2rem;
   
         a {
           text-decoration: none;
+
+          @media (max-width: $breakpoint-sm) {
+            font-size: 0.9rem;
+          }
           
           &:hover {
             color: $secondary-text-color;
