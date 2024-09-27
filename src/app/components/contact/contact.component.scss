@@ -11,3 +11,9 @@
       font-size: smaller; // Nadpisanie rozmiaru czcionki dla etykiet
     }
   }
+    @media (max-width: $breakpoint-xs) {
+      
+    .form-label {
+      font-size: x-small; // Nadpisanie rozmiaru czcionki dla etykiet
+    }
+  }
