@@ -9,6 +9,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { WindowRef } from './core/services/window-ref';
+import { TechStackComponent } from "./components/tech-stack/tech-stack.component";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { WindowRef } from './core/services/window-ref';
     ServicesComponent,
     PortfolioComponent,
     ContactComponent,
-  ],
+    TechStackComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -56,7 +58,7 @@ export class AppComponent implements AfterViewInit {
   private observeSections() {
     if (isPlatformBrowser(this.platformId)) {
       const sections = this.document.querySelectorAll(
-        'app-about, app-services, app-portfolio, app-contact, app-main'
+        'app-about, app-services, app-portfolio, app-tech-stack, app-contact, app-main'
       );
 
       const observerOptions = {

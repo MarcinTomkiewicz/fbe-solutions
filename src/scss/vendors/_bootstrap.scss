@@ -1,1 +1,19 @@
+.carousel-control-prev,
+.carousel-control-next {
+  color: $primary-color; // Ustaw kolor
+  width: auto!important; // Ustaw szerokość na auto
+  top: 50%!important; // Wyrównanie w pionie
+  transform: translateY(-50%); // Wyśrodkowanie pionowe
+  filter: invert(1);
+
+  // Zmiana koloru SVG
+  svg {
+    fill: currentColor; // Wykorzystaj currentColor, aby kontrować kolor
+  }
+
+  &:hover {
+    color: lighten($primary-color, 20%); // Zmiana koloru na hover
+  }
+}
+
 $form-label-font-size: large;
