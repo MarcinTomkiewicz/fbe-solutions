@@ -1,13 +1,13 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { TechStack } from '../../core/interfaces/i-techStack';
 import { CommonModule } from '@angular/common';
-import { NgbCarouselConfig, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tech-stack',
   standalone: true,
   imports: [CommonModule, NgbCarouselModule],
-  providers: [NgbCarouselConfig],
+  providers: [NgbCarouselConfig, NgbCarousel],
   templateUrl: './tech-stack.component.html',
   styleUrl: './tech-stack.component.scss'
 })
@@ -94,7 +94,11 @@ export class TechStackComponent {
   ];
 
   techStackGroups: TechStack[][] = [];
-  carouselConfig = inject(NgbCarouselConfig)
+  carouselConfig = inject(NgbCarouselConfig);
+  carousel = inject(NgbCarousel)
+
+  private touchStartX = 0;
+  private touchEndX = 0;
 
   constructor() {
     this.initializeTechStackGroups();
@@ -143,5 +147,30 @@ export class TechStackComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.initializeTechStackGroups();
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(event: TouchEvent): void {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipeGesture();
+  }
+
+  handleSwipeGesture(): void {
+    const swipeDistance = this.touchStartX - this.touchEndX;
+
+    // Przesunięcie w lewo (next slide)
+    if (swipeDistance > 50) {
+      this.carousel.next();
+    }
+
+    // Przesunięcie w prawo (previous slide)
+    if (swipeDistance < -50) {
+      this.carousel.prev();
+    }
   }
 }
