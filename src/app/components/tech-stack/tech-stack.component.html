@@ -4,7 +4,7 @@
     <div class="image-banner-container">
       <img src="construction.jpeg" alt="Banner for services" class="image-banner"/>
     </div>
-    <ngb-carousel class="tech-carousel" [interval]="0">
+    <ngb-carousel #carousel class="tech-carousel" [interval]="0">
       <ng-template ngbSlide *ngFor="let techStacks of techStackGroups; trackBy: trackTechs">
         <div class="row justify-content-center">
           <div *ngFor="let techStack of techStacks; trackBy: trackById" class="col-12 col-sm-10 col-md-4 col-lg-3 col-xl-2 mb-4">
