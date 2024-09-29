@@ -1,4 +1,10 @@
 :host {
     display: block;
-    height: 100%; /* Wysokość 100% rodzica (main) */
+    height: 100vh;
+
+    @media (max-width: $breakpoint-md) {
+      @media (orientation: landscape) {
+        height: auto;
+      }
+    }
   }

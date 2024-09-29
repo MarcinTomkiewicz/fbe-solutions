@@ -2,12 +2,18 @@
 @import 'abstracts/mixins';
 
 :host {
+    height: 100vh;
     display: block;
-    height: 100%; /* Wysokość 100% rodzica (main) */
+    
+    @media (max-width: $breakpoint-md) {
+      @media (orientation: landscape) {
+        height: auto;
+      }
+    }
   }
 
 .component-container {
-    height: 100%;
+    // height: 100%;
     @include flex-wrapper(column);
     gap: 15px;
     justify-content: flex-start;

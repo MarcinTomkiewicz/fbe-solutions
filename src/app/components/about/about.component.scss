@@ -4,6 +4,12 @@
 :host {
   height: 100vh;
   display: block;
+
+  @media (max-width: $breakpoint-md) {
+    @media (orientation: landscape) {
+      height: auto;
+    }
+  }
 }
 
 .component-container {
@@ -179,7 +185,7 @@
     padding: 1rem;
 
     .about-paragraph {
-      font-size: large;
+      font-size: medium;
       &:nth-child(3) {
         display: none;
       }

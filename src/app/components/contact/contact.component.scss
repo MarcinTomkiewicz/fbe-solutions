@@ -4,6 +4,12 @@
     display: block;
     height: 100%; /* Wysokość 100% rodzica (main) */
     background-color: $primary-color;
+
+    @media (max-width: $breakpoint-md) {
+      @media (orientation: landscape) {
+        height: auto;
+      }
+    }
   }
 
   .responsive-textarea {
@@ -16,7 +22,9 @@
     }
   }
     @media (max-width: $breakpoint-xs) {
-      
+      .component-container {
+        padding: 0.5rem;
+      }
     .form-label {
       font-size: x-small; // Nadpisanie rozmiaru czcionki dla etykiet
     }
