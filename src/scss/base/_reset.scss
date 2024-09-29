@@ -14,8 +14,4 @@
     line-height: 1.6;
     font-family: $font-family-base;
     background-color: $bg-color;
-
-    @media (max-width: $breakpoint-sm) {
-      padding-top: $navbar-height!important;
-    }
   }

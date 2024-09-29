@@ -5,6 +5,7 @@ body {
 @media (max-width: $breakpoint-sm) {
   body {
     font-size: $font-size-sm;
+    padding-top: $navbar-height!important;
   }
 }
 
