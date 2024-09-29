@@ -1,34 +1,34 @@
-@import 'abstracts/variables';
+@import "abstracts/variables";
 
 :host {
-    display: block;
-    height: 100%; /* Wysokość 100% rodzica (main) */
-    background-color: $primary-color;
-
-    @media (max-width: $breakpoint-md) {
-      @media (orientation: landscape) {
-        height: auto;
-      }
-    }
-  }
-
-  .responsive-textarea {
-    height: auto; /* Umożliwiamy dynamiczną wysokość */
-  }
+  display: block;
+  height: 100%; /* Wysokość 100% rodzica (main) */
+  background-color: $primary-color;
 
   @media (max-width: $breakpoint-md) {
-    .form-label {
-      font-size: smaller; // Nadpisanie rozmiaru czcionki dla etykiet
+    @media (orientation: landscape) {
+      height: auto;
     }
   }
-    @media (max-width: $breakpoint-xs) {
-      .component-container {
-        padding: 0.5rem;
-      }
-    .form-label {
-      font-size: x-small; // Nadpisanie rozmiaru czcionki dla etykiet
-    }
-    .responsive-textarea {
-      height: 60px; /* Umożliwiamy dynamiczną wysokość */
-    }
+}
+
+.responsive-textarea {
+  height: auto; /* Umożliwiamy dynamiczną wysokość */
+}
+
+@media (max-width: $breakpoint-md) {
+  .form-label {
+    font-size: smaller; // Nadpisanie rozmiaru czcionki dla etykiet
   }
+}
+@media (max-width: $breakpoint-xs) {
+  .component-container {
+    padding: 0.5rem;
+  }
+  .form-label {
+    font-size: x-small; // Nadpisanie rozmiaru czcionki dla etykiet
+  }
+  .responsive-textarea {
+    height: 60px; /* Umożliwiamy dynamiczną wysokość */
+  }
+}

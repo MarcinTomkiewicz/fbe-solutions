@@ -2,57 +2,60 @@
   <div>
     <h2 class="section-title">Oferta usług FBE Solutions</h2>
     <div>
-      Zapraszam serdecznie do skorzystania z oferty usług, które realizuję z
-      pełnym zaangażowaniem, zgodnie z najlepszymi praktykami branżowymi. Każde
-      zlecenie traktuję indywidualnie, dopasowując rozwiązania do specyficznych
-      potrzeb klienta, tak aby efekt końcowy spełniał najwyższe standardy. Tworzę
-      strony i aplikacje internetowe, które są nie tylko funkcjonalne, ale również
-      nowoczesne i przyjazne dla użytkownika. Dbam o każdy szczegół, począwszy od
-      estetyki, aż po optymalizację techniczną, zapewniając, że gotowy projekt
-      będzie spełniał zarówno potrzeby Twojej firmy, jak i oczekiwania
-      użytkowników.
+      Zapraszamy serdecznie do skorzystania z naszej oferty usług, które
+      realizujemy z pełnym zaangażowaniem, zgodnie z najlepszymi praktykami
+      branżowymi. Każde zlecenie traktujemy indywidualnie, dopasowując
+      rozwiązania do specyficznych potrzeb klienta, aby efekt końcowy spełniał
+      najwyższe standardy. Tworzymy strony i aplikacje internetowe, które są nie
+      tylko funkcjonalne, ale również nowoczesne i przyjazne dla użytkownika.
+      Dbamy o każdy szczegół, począwszy od estetyki, aż po optymalizację
+      techniczną, zapewniając, że gotowy projekt będzie spełniał zarówno
+      potrzeby Twojej firmy, jak i oczekiwania użytkowników.
     </div>
   </div>
   <div class="image-banner-container">
-    <img src="pad3.jpeg" alt="Banner for services" class="image-banner"/>
+    <img src="pad3.jpeg" alt="Banner for services" class="image-banner" />
   </div>
   <div>
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr class="table-header">
-        <th scope="col">Nazwa usługi</th>
-        <th scope="col">Cena</th>
-        <th scope="col" class="large-screens">Opis</th>
-        <th scope="col" style="white-space: nowrap;">Czas realizacji</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-      *ngFor="let service of services"
-      ngbTooltip="{{ service.longDescription }}"
-      tooltipClass="custom-tooltip"
-      triggers="click:blur"
-    >
-        <td><span class="small-screens"><i class="bi bi-info-square"></i></span> {{ service.name }}</td>
-        <td>
-          {{ service.price | number }} zł
-          {{ service.priceOrMore ? "lub więcej" : "" }}
-        </td>
-        <td class="large-screens">{{ service.shortDescription }}</td>
-        <td>{{ service.realisation }}</td>
-      </tr>
-    </tbody>
-</table>
-<div class="disclaimer">
-  <div>
-    Podane ceny w tabeli są kwotami netto, do których należy doliczyć 23% VAT.
-    Zależnie od specyficznych wymagań klienta, końcowy koszt realizacji
-    projektu może być wyższy od przedstawionego w ofercie. Hosting serwisu
-    oraz baza danych leżą po stronie klienta. Czas realizacji usług jest
-    orientacyjny i może ulec zmianie z przyczyn obiektywnych, takich jak
-    skomplikowanie projektu czy dodatkowe modyfikacje w trakcie realizacji.
-    Cena nie obejmuje projektu graficznego ani designu.
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr class="table-header">
+          <th scope="col">Nazwa usługi</th>
+          <th scope="col">Cena</th>
+          <th scope="col" class="large-screens">Opis</th>
+          <th scope="col" style="white-space: nowrap">Czas realizacji</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let service of services"
+          ngbTooltip="{{ service.longDescription }}"
+          tooltipClass="custom-tooltip"
+          triggers="click:blur"
+        >
+          <td>
+            <span class="small-screens"><i class="bi bi-info-square"></i></span>
+            {{ service.name }}
+          </td>
+          <td>
+            {{ service.price | number }} zł
+            {{ service.priceOrMore ? "lub więcej" : "" }}
+          </td>
+          <td class="large-screens">{{ service.shortDescription }}</td>
+          <td>{{ service.realisation }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="disclaimer">
+      <div>
+        Podane ceny w tabeli są kwotami netto, do których należy doliczyć 23%
+        VAT. Zależnie od specyficznych wymagań klienta, końcowy koszt realizacji
+        projektu może być wyższy od przedstawionego w ofercie. Hosting serwisu
+        oraz baza danych leżą po stronie klienta. Czas realizacji usług jest
+        orientacyjny i może ulec zmianie z przyczyn obiektywnych, takich jak
+        skomplikowanie projektu czy dodatkowe modyfikacje w trakcie realizacji.
+        Cena nie obejmuje projektu graficznego ani designu.
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>

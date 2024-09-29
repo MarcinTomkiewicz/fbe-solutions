@@ -1,95 +1,103 @@
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
 :host {
-    height: 100vh;
-    display: block;
-    
-    @media (max-width: $breakpoint-md) {
-      @media (orientation: landscape) {
-        height: auto;
-      }
+  display: block;
+  height: 100vh;
+
+  @media (max-width: $breakpoint-md) {
+    @media (orientation: landscape) {
+      height: auto;
     }
   }
+}
 
 .component-container {
-    // height: 100%;
-    @include flex-wrapper(column);
-    gap: 15px;
-    justify-content: flex-start;
+  // height: 100%;
+  @include flex-wrapper(column);
+  gap: 15px;
+  justify-content: flex-start;
+  height: 100vh;
+
+  @media (max-width: $breakpoint-md) {
+    @media (orientation: landscape) {
+      height: auto;
+    }
+  }
 }
 
 .section-title {
-    font-size: 2rem;
-    color: $secondary-color!important;
-    margin-bottom: 10px;
+  font-size: 2rem;
+  color: $secondary-color !important;
+  margin-bottom: 10px;
 }
 
 .disclaimer {
-    margin-top: 20px;
-    font-size: smaller;
-    color: $secondary-color;
+  margin-top: 20px;
+  font-size: smaller;
+  color: $secondary-color;
 }
 
 .image-banner-container {
-    width: 100%;
+  width: 100%;
 }
 
 .image-banner {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  object-position: 0 30%;
+}
+
+@media (max-width: $breakpoint-lg) {
+  th.large-screens,
+  td.large-screens {
+    display: none;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .component-container {
+    font-size: smaller;
+  }
+  .image-banner {
     width: 100%;
-    max-height: 250px;
+    max-height: 150px;
     object-fit: cover;
     object-position: 0 30%;
   }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .component-container {
+    font-size: x-small;
+  }
+  .section-title {
+    font-size: 1.5rem;
+    color: $secondary-color !important;
+    margin-bottom: 10px;
+  }
+  .image-banner {
+    width: 100%;
+    max-height: auto;
+    object-fit: cover;
+    object-position: 0 30%;
+  }
+  .disclaimer {
+    font-size: x-small;
+  }
+}
+
+.custom-tooltip .tooltip-inner {
+  max-width: 90vw;
+  white-space: normal;
+  text-align: left;
+}
+
+.small-screens {
+  display: none;
 
   @media (max-width: $breakpoint-lg) {
-    th.large-screens, td.large-screens {
-        display: none;
-    }
+    display: inline;
   }
-
-  @media (max-width: $breakpoint-sm) {
-    .component-container {
-        font-size: smaller;
-    }
-    .image-banner {
-        width: 100%;
-        max-height: 150px;
-        object-fit: cover;
-        object-position: 0 30%;
-      }
-  }
-
-  @media (max-width: $breakpoint-xs) {
-    .component-container {
-        font-size: x-small;
-    }
-    .section-title {
-        font-size: 1.5rem;
-        color: $secondary-color!important;
-        margin-bottom: 10px;
-    }
-    .image-banner {
-        width: 100%;
-        max-height: auto;
-        object-fit: cover;
-        object-position: 0 30%;
-      }
-      .disclaimer {
-        font-size: x-small;
-      }
-  }
-
-  .custom-tooltip .tooltip-inner {
-    max-width: 90vw;
-    white-space: normal;
-    text-align: left;
-  }
-
-  .small-screens {
-    display: none;
-
-    @media (max-width: $breakpoint-lg) {
-      display: inline;
-    }
-  }
+}
