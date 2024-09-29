@@ -2,20 +2,28 @@
 @import "abstracts/mixins";
 
 :host {
-  @include flex-wrapper(row);
   height: 100vh;
+  display: block;
+}
+
+.component-container {
+  @include flex-wrapper(row);
   background-color: $primary-color;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   flex-direction: row-reverse;
+  height: 100%;
+  gap: 10px;
 
   @media (max-width: $breakpoint-md) {
     flex-flow: column-reverse;
+    gap: 10px;
   }
 
   @media (max-width: $breakpoint-sm) {
     height: 100%;
     padding: 0.5rem;
+    gap: 10px;
   }
 }
 
@@ -31,12 +39,12 @@
   @media (max-width: $breakpoint-md) {
     max-width: unset;
     width: 100%;
-    height: 100px;
-    flex: unset;
+    height: auto;
+    flex-grow: 1;
   }
 
   @media (max-width: $breakpoint-sm) {
-    height: 100px;
+    height: auto;
   }
 
   .cta-button {
@@ -86,12 +94,15 @@
     &:nth-of-type(1) {
       animation-delay: 0.3s;
     }
+
     &:nth-of-type(2) {
       animation-delay: 0.6s;
     }
+
     &:nth-of-type(3) {
       animation-delay: 0.9s;
     }
+
     &:last-child {
       animation-delay: 1.2s;
       margin-bottom: 0;
@@ -132,17 +143,20 @@
     padding: 0;
     padding-top: 1rem;
     margin: 0;
-    
+    overflow: unset;
+
     /* Wyłączanie efektów hover dla .about-paragraph */
     &:hover {
       box-shadow: none;
       transform: none;
       background-color: $primary-color;
     }
+
     &:hover .about-paragraph {
       color: $text-color;
       text-shadow: none;
     }
+
     &:hover .about-paragraph:first-of-type::first-letter {
       transform: none;
       color: $secondary-color;
@@ -151,7 +165,12 @@
 
   @media (max-width: $breakpoint-sm) {
     .about-paragraph {
-      font-size: medium;
+      font-size: large;
+
+      /* Ukrywanie 3. i 4. paragrafu */
+      &:nth-child(4) {
+        display: none;
+      }
     }
   }
 
@@ -160,7 +179,10 @@
     padding: 1rem;
 
     .about-paragraph {
-      font-size: x-small;
+      font-size: large;
+      &:nth-child(3) {
+        display: none;
+      }
     }
   }
 }
@@ -169,6 +191,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

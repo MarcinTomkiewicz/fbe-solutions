@@ -10,6 +10,7 @@
     height: 100%;
     @include flex-wrapper(column);
     gap: 15px;
+    justify-content: flex-start;
 }
 
 .section-title {
@@ -20,7 +21,7 @@
 
 .disclaimer {
     margin-top: 20px;
-    font-size: 0.9rem;
+    font-size: smaller;
     color: $secondary-color;
 }
 
@@ -71,4 +72,18 @@
       .disclaimer {
         font-size: x-small;
       }
+  }
+
+  .custom-tooltip .tooltip-inner {
+    max-width: 90vw;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .small-screens {
+    display: none;
+
+    @media (max-width: $breakpoint-lg) {
+      display: inline;
+    }
   }

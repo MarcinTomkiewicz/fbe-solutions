@@ -28,12 +28,14 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let service of services"
-        ngbTooltip="{{ service.shortDescription }}"
-      >
-        <td>{{ service.name }}</td>
+      *ngFor="let service of services"
+      ngbTooltip="{{ service.longDescription }}"
+      tooltipClass="custom-tooltip"
+      triggers="click:blur"
+    >
+        <td><span class="small-screens"><i class="bi bi-info-square"></i></span> {{ service.name }}</td>
         <td>
-          {{ service.price | number }} PLN
+          {{ service.price | number }} zł
           {{ service.priceOrMore ? "lub więcej" : "" }}
         </td>
         <td class="large-screens">{{ service.shortDescription }}</td>
