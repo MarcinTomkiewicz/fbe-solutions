@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  height: 100%; /* Wysokość 100% rodzica (main) */
+  min-height: 100vh;
   background-color: $primary-color;
 
   @media (max-width: $breakpoint-md) {
@@ -30,5 +30,22 @@
   }
   .responsive-textarea {
     height: 60px; /* Umożliwiamy dynamiczną wysokość */
+  }
+}
+
+.custom-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1050;
+  
+  .toast-progress-bar {
+    margin: 0;
+    width: 100%;
+    margin-top: 5px; /* Odstęp między treścią toasta a paskiem */
+  }
+  
+  .btn-close {
+    margin-left: auto;  // Aby przycisk zamknięcia był po prawej stronie
   }
 }

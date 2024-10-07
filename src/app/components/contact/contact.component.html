@@ -144,4 +144,32 @@
       </div>
     </form>
   </div>
+  <ngb-toast
+    *ngIf="showToast"
+    [autohide]="false"
+    [class]="toastType === 'success' ? 'bg-success text-light' : 'bg-danger text-light'"
+    (hidden)="closeToast()"
+    class="custom-toast"
+  >
+    <div class="d-flex justify-content-between align-items-center">
+      <span>{{ toastMessage }}</span>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="closeToast()"
+        aria-label="Close"
+      ></button>
+    </div>
+
+    <!-- Progress bar using ngb-progressbar -->
+    <ngb-progressbar
+      [value]="progress"
+      [showValue]="true"
+      [animated]="true"
+      [striped]="true"
+      class="toast-progress-bar"
+      type="success"
+      height="5px"
+    ></ngb-progressbar>
+  </ngb-toast>
 </div>

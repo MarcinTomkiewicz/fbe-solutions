@@ -3,7 +3,8 @@
 
 :host {
   display: block;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 
   @media (max-width: $breakpoint-md) {
     @media (orientation: landscape) {

@@ -2,7 +2,7 @@
 @import "abstracts/mixins";
 
 :host {
-  height: 100vh;
+  min-height: 100vh;
   display: block;
 
   @media (max-width: $breakpoint-md) {
