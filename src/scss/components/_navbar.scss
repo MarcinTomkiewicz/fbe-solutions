@@ -1,7 +1,7 @@
 @import "abstracts/variables";
 
 .navbar {
-  position: fixed!important; // Ustawienie na fixed
+  position: fixed !important; // Ustawienie na fixed
   top: 0;
   left: 0;
   width: 100%;
@@ -9,48 +9,50 @@
   z-index: 999; // Upewnij się, że navbar jest na wierzchu
   background-color: $primary-color; // Kolor tła
 
+  @media (min-width: $breakpoint-sm) {
+    position: static !important; // Przyklejona nawigacja na większych ekranach
+    top: 0;
+    left: 0;
+    z-index: 1000; // Wysoki z-index, aby nawigacja była nad treścią
+  }
 
-    @media (min-width: $breakpoint-sm) {
-        position: static!important; // Przyklejona nawigacja na większych ekranach
-        top: 0;
-        left: 0;
-        z-index: 1000; // Wysoki z-index, aby nawigacja była nad treścią
+  .navbar-brand {
+    padding-left: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    @media (max-width: $breakpoint-sm) {
+      display: none;
+    }
+  }
+
+  .navbar-nav {
+    list-style: none;
+    text-align: center;
+    @include flex-wrapper(row);
+
+    @media (max-width: $breakpoint-sm) {
+      justify-content: space-around;
+      width: 100%;
     }
 
-    .navbar-brand {
-        padding-left: 2rem;
-        font-size: 1.5rem;
-        font-weight: bold;
+    li {
+      margin-right: 2rem;
+      @media (max-width: $breakpoint-sm) {
+        margin-right: 0%;
+      }
+      a {
+        text-decoration: none;
 
         @media (max-width: $breakpoint-sm) {
-            display: none;
+          font-size: 0.9rem;
+          text-align: center;
         }
+
+        &:hover {
+          color: $secondary-text-color;
+        }
+      }
     }
-
-    .navbar-nav {
-        list-style: none;
-        @include flex-wrapper(row);
-        
-        @media (max-width: $breakpoint-sm) {
-            justify-content: space-around;
-            width: 100%;
-            padding-left: 2rem;
-        }
-
-        li {
-            margin-right: 2rem;
-
-            a {
-                text-decoration: none;
-
-                @media (max-width: $breakpoint-sm) {
-                    font-size: 0.9rem;
-                }
-
-                &:hover {
-                    color: $secondary-text-color;
-                }
-            }
-        }
-    }
+  }
 }

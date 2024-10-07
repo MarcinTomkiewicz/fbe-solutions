@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MessageModalComponent } from '../../common/message-modal/message-modal.component';
 import { take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
@@ -16,14 +17,17 @@ import { take } from 'rxjs';
 export class ContactComponent {
   contactForm: FormGroup;
   modalService = inject(NgbModal);
-  private breakpointObserver = inject(BreakpointObserver)
-  topics = [
+  http = inject(HttpClient);
+  private readonly breakpointObserver = inject(BreakpointObserver)
+  private readonly fb =  inject(FormBuilder)
+    topics = [
     'Zapytanie ofertowe / Wycena',
     'Zamówienie',
     'Ogólne'
   ];
+  isSmallScreen = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.contactForm = this.fb.group({
       topic: [this.topics[0]], // domyślny temat
       firstName: ['', Validators.required],
@@ -33,33 +37,41 @@ export class ContactComponent {
       phone: ['', Validators.required],
       message: ['', Validators.required],
     });
+
+    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(result => {
+      this.isSmallScreen = result.matches; // Zapisz stan czy to jest mały ekran
+    });
   }
 
   openModal() {
     // Używamy BreakpointObserver do sprawdzenia, czy ekran jest mniejszy niż xs
-    this.breakpointObserver.observe(Breakpoints.XSmall).subscribe(result => {
-      console.log(result);
-      
-      if (result.matches) {
-        // Otwieramy modal z klasą large-modal
-        const modalRef = this.modalService.open(MessageModalComponent, { 
-          size: 'sm',
-          centered: true,
-        });
-        
-        modalRef.componentInstance.message = this.contactForm.get('message')?.value || '';
-  
-        modalRef.componentInstance.result$.pipe(take(1)).subscribe((result: string) => {
-          this.contactForm.patchValue({ message: result });
-        });
-      }
-    });
+    if (this.isSmallScreen) {  // Otwórz modal tylko na małych ekranach
+      const modalRef = this.modalService.open(MessageModalComponent, { 
+        size: 'sm',
+        centered: true,
+      });
+
+      modalRef.componentInstance.message = this.contactForm.get('message')?.value || '';
+
+      modalRef.componentInstance.result$.pipe(take(1)).subscribe((result: string) => {
+        this.contactForm.patchValue({ message: result });
+      });
+    }
+
   }
 
   onSubmit() {
     if (this.contactForm.valid) {
       console.log(this.contactForm.value);
-      // Możesz tutaj dodać logikę do wysyłania formularza
+      this.http.post('http://localhost:1337/api/contact', this.contactForm.value)
+      .subscribe({
+        next: (response) => {
+          console.log('Form sent successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error sending form:', error);
+        },
+      });
     }
   }
 

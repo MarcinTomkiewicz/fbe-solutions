@@ -4,7 +4,12 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="topic" class="form-label">Temat</label>
-        <select id="topic" formControlName="topic" class="form-select form-select-sm">
+        <select
+          id="topic"
+          formControlName="topic"
+          class="form-select form-select-sm"
+          autocomplete="off"
+        >
           <option *ngFor="let topic of topics" [value]="topic">
             {{ topic }}
           </option>
@@ -15,9 +20,12 @@
         <label for="firstName" class="form-label">Imię*</label>
         <input
           id="firstName"
+          name="firstName"
+          type="text"
           formControlName="firstName"
           class="form-control form-control-sm"
           required
+          autocomplete="given-name"
         />
         <div
           *ngIf="
@@ -35,8 +43,10 @@
         <input
           id="lastName"
           formControlName="lastName"
+          type="text"
           class="form-control form-control-sm"
           required
+          autocomplete="family-name"
         />
         <div
           *ngIf="
@@ -51,7 +61,14 @@
 
       <div class="mb-3">
         <label for="company" class="form-label">Firma</label>
-        <input id="company" formControlName="company" class="form-control form-control-sm" />
+        <input
+          id="company"
+          name="company"
+          type="text"
+          formControlName="company"
+          class="form-control form-control-sm"
+          autocomplete="organization"
+        />
       </div>
 
       <div class="mb-3">
@@ -62,6 +79,7 @@
           type="email"
           class="form-control form-control-sm"
           required
+          autocomplete="email"
         />
         <div
           *ngIf="
@@ -75,12 +93,14 @@
       </div>
 
       <div class="mb-3">
-        <label for="phone" class="form-label">Nr. telefonu*</label>
+        <label for="phone" class="form-label">Nr telefonu*</label>
         <input
           id="phone"
           formControlName="phone"
+          type="tel"
           class="form-control form-control-sm"
           required
+          autocomplete="tel"
         />
         <div
           *ngIf="
@@ -89,7 +109,7 @@
           "
           class="text-danger"
         >
-          Nr. telefonu jest wymagany.
+          Nr telefonu jest wymagany.
         </div>
       </div>
 
@@ -101,8 +121,9 @@
           class="form-control responsive-textarea"
           rows="5"
           required
-          (click)="openModal()"
-          readonly
+          (click)="isSmallScreen ? openModal() : null"
+          [readonly]="isSmallScreen"
+          autocomplete="off"
         ></textarea>
         <div
           *ngIf="

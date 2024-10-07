@@ -3,7 +3,8 @@
 
 :host {
   display: block;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 
   @media (max-width: $breakpoint-md) {
     @media (orientation: landscape) {
@@ -13,11 +14,9 @@
 }
 
 .component-container {
-  // height: 100%;
   @include flex-wrapper(column);
   gap: 15px;
   justify-content: flex-start;
-  height: 100vh;
 
   @media (max-width: $breakpoint-md) {
     @media (orientation: landscape) {
@@ -34,7 +33,8 @@
 
 .disclaimer {
   margin-top: 20px;
-  font-size: smaller;
+  margin-bottom: 20px;
+  font-size: x-small;
   color: $secondary-color;
 }
 
@@ -53,6 +53,14 @@
   th.large-screens,
   td.large-screens {
     display: none;
+  }
+}
+
+.service-name {
+  width: 40%;
+
+  @media (max-width: $breakpoint-lg) {
+    width: 60%;
   }
 }
 

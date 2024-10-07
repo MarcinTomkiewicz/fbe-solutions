@@ -1,5 +1,15 @@
 @import "abstracts/variables";
 
+:host {
+  display: block;
+  height: auto;
+
+  @media (orientation: landscape) {
+      min-height: unset;
+      height: auto;
+  }
+}
+
 // Stylowanie dla większych ekranów
 main {
   display: flex;
