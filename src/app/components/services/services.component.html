@@ -16,7 +16,7 @@
   <div class="image-banner-container">
     <img src="pad3.jpeg" alt="Banner for services" class="image-banner" />
   </div>
-  <div>
+  <div class="w-100">
     <app-services-table [services]="mainServices"></app-services-table>
     <div class="disclaimer">
       <div>
@@ -30,13 +30,14 @@
       </div>
     </div>
     <h4>Usługi dodatkowe</h4>
-    <app-services-table [services]="additionalServices"></app-services-table>
-    <div class="disclaimer">
-      <div>
-        * Cena dotyczy jednego komponentu / jednej interakcji.
-      </div>
-      <div>
-        ** Cena zależy od stopnia skomplikowania projektu i liczby komponentów / podstron do utworzenia.
+    <div class="w-100">
+      <app-services-table [services]="additionalServices"></app-services-table>
+      <div class="disclaimer">
+        <div>* Cena dotyczy jednego komponentu / jednej interakcji.</div>
+        <div>
+          ** Cena zależy od stopnia skomplikowania projektu i liczby komponentów
+          / podstron do utworzenia.
+        </div>
       </div>
     </div>
   </div>
