@@ -96,10 +96,10 @@ export class ServicesComponent {
       realisation: '1-2 tygodnie',
     },
     {
-      name: 'Tworzenie komponentów w React/Angular',
+      name: 'Tworzenie komponentów w React/Angular*',
       price: 1000,
       priceOrMore: true,
-      shortDescription: 'Rozwój komponentów frontendowych.*',
+      shortDescription: 'Rozwój komponentów frontendowych.',
       longDescription:
         'Tworzymy komponenty zgodne z najlepszymi praktykami w popularnych frameworkach takich jak React, Angular lub Vue.',
       realisation: '1-3 tygodnie',
@@ -113,28 +113,28 @@ export class ServicesComponent {
       realisation: "1 dzień"
     },
     {
-      name: 'Tworzenie interakcji w CSS/JS',
+      name: 'Tworzenie interakcji w CSS/JS*',
       price: 500,
       priceOrMore: false,
-      shortDescription: 'Dodawanie interakcji do Twojej aplikacji.*',
+      shortDescription: 'Dodawanie interakcji do Twojej aplikacji.',
       longDescription:
         'Tworzymy efektowne interakcje w aplikacjach webowych, aby poprawić doświadczenie użytkowników.',
       realisation: '1 tydzień',
     },
     {
-      name: 'Dostosowanie UI/UX',
+      name: 'Dostosowanie UI/UX**',
       price: 800,
       priceOrMore: true,
-      shortDescription: 'Poprawa interfejsu użytkownika.**',
+      shortDescription: 'Poprawa interfejsu użytkownika.',
       longDescription:
         'Analizujemy i dostosowujemy interfejs użytkownika do potrzeb użytkowników, aby poprawić ich doświadczenia.',
       realisation: '1-2 tygodnie',
     },
     {
-      name: 'Migracja aplikacji na nowe technologie',
+      name: 'Migracja aplikacji na nowe technologie**',
       price: 1200,
       priceOrMore: true,
-      shortDescription: 'Aktualizacja technologii aplikacji.**',
+      shortDescription: 'Aktualizacja technologii aplikacji.',
       longDescription:
         'Pomagamy w migracji aplikacji frontendowych na nowoczesne technologie lub frameworki - takie jak Angular czy React.',
       realisation: '2-4 tygodnie',
