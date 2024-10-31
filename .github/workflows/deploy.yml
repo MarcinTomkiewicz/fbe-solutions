@@ -21,11 +21,15 @@ jobs:
                   source: '.'  # Katalog źródłowy do skopiowania
                   target: '/fbe-solutions'  # Docelowy katalog na VPS
 
-            - name: SSH and Deploy
+            - name: Setup SSH Agent
               uses: webfactory/ssh-agent@v0.5.3  # Użycie akcji SSH
               with:
                   ssh-private-key: ${{ secrets.VPS_PRIVATE_KEY }}
+
+            - name: SSH and Deploy
               run: |  # Użycie 'run' do wykonania skryptu
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
                   cd /fbe-solutions  # Zmiana katalogu na serwerze do skopiowanego folderu
                   docker-compose down  # Zatrzymanie kontenerów
                   docker-compose up -d --build  # Uruchomienie kontenerów w tle
+                  EOF
