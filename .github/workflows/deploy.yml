@@ -15,7 +15,7 @@ jobs:
             - name: Copy files to VPS
               uses: garygrossgarten/github-action-scp@release  # Użycie akcji do kopiowania plików
               with:
-                  remote: ${{ secrets.VPS_IP }}  # IP twojego VPS
+                  host: ${{ secrets.VPS_IP }}  # IP twojego VPS
                   username: ${{ secrets.VPS_USER }}  # Użytkownik VPS
                   privateKey: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny
                   local: './*'  # Katalog źródłowy do skopiowania (wszystkie pliki w bieżącym katalogu)
