@@ -10,17 +10,22 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v2  # Krok 1: Klonowanie repozytorium
 
-            - name: Start SSH Agent
-              uses: webfactory/ssh-agent@v0.5.3
+            - name: Copy files to VPS
+              uses: garygrossgarten/github-action-scp@release  # Użycie akcji do kopiowania plików
+              with:
+                  remote: ${{ secrets.VPS_IP }}  # IP twojego VPS
+                  username: ${{ secrets.VPS_USER }}  # Użytkownik VPS
+                  privateKey: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny
+                  source: '.'  # Katalog źródłowy do skopiowania
+                  target: '/fbe-solutions'  # Docelowy katalog na VPS
+
+            - name: SSH and Deploy
+              uses: webfactory/ssh-agent@v0.5.3  # Użycie akcji SSH
               with:
                   ssh-private-key: ${{ secrets.VPS_PRIVATE_KEY }}
-
-            - name: SSH and run deployment commands
-              run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
-                      cd /path/to/your/project  
-                      docker-compose down
-                      docker-compose up -d --build
-                  EOF
+              run: |  # Użycie 'run' do wykonania skryptu
+                  cd /fbe-solutions  # Zmiana katalogu na serwerze do skopiowanego folderu
+                  docker-compose down  # Zatrzymanie kontenerów
+                  docker-compose up -d --build  # Uruchomienie kontenerów w tle
