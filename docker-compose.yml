@@ -1,23 +1,46 @@
-version: "3"
+version: '3.8'
+
 services:
   backend:
-    build: ./backend
-    ports:
-      - "1337:1337"
-    volumes:
-      - ./backend:/app
+    build:
+      context: ./backend  # Katalog backendu
+    image: strapi-backend  # Nazwa obrazu dla backendu
     environment:
-      - NODE_ENV=development
-    # depends_on:
-    #   - frontend
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi_db
+      DATABASE_USERNAME: strapi_user
+      DATABASE_PASSWORD: strapi_password
+    depends_on:
+      - db  # Umożliwia uruchomienie backendu po uruchomieniu bazy danych
+    ports:
+      - "1337:1337"  # Eksport portu 1337 na hosta
+    networks:
+      - fbe-solutions  # Przypisanie do sieci
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend  # Katalog frontendu
+    image: angular-frontend  # Nazwa obrazu dla frontendu
     ports:
-      - "4200:4200"
-    volumes:
-      - ./frontend:/app
+      - "4200:80"  # Eksport portu 4200 na hosta
+    networks:
+      - fbe-solutions  # Przypisanie do sieci
+
+  db:
+    image: postgres:13  # Użycie obrazu PostgreSQL
     environment:
-      - NODE_ENV=development
-    depends_on:
-      - backend
+      POSTGRES_USER: strapi_user  # Użytkownik bazy danych
+      POSTGRES_PASSWORD: strapi_password  # Hasło bazy danych
+      POSTGRES_DB: strapi_db  # Nazwa bazy danych
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Trwały wolumen na dane bazy
+    networks:
+      - fbe-solutions  # Przypisanie do sieci
+
+networks:
+  fbe-solutions:  # Deklaracja sieci
+
+volumes:
+  db_data:  # Trwały wolumen na dane bazy
