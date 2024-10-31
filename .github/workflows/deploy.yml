@@ -18,8 +18,9 @@ jobs:
                   remote: ${{ secrets.VPS_IP }}  # IP twojego VPS
                   username: ${{ secrets.VPS_USER }}  # Użytkownik VPS
                   privateKey: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny
-                  source: '.'  # Katalog źródłowy do skopiowania
-                  target: '/fbe-solutions'  # Docelowy katalog na VPS
+                  local: './*'  # Katalog źródłowy do skopiowania (wszystkie pliki w bieżącym katalogu)
+                  remote: '/fbe-solutions/'  # Docelowy katalog na VPS
+                  recursive: true  # Jeśli chcesz skopiować foldery rekurencyjnie
 
             - name: Setup SSH Agent
               uses: webfactory/ssh-agent@v0.5.3  # Użycie akcji SSH
