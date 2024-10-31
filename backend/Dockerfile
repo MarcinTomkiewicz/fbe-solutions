@@ -1,19 +1,20 @@
-# 1. Use the official Node.js image
-FROM node:20-alpine
+# Użyj oficjalnego obrazu Node.js jako podstawy
+FROM node:18
 
-# 2. Set the working directory in the container
-WORKDIR /app
+# Ustaw katalog roboczy
+WORKDIR /usr/src/app
 
+# Skopiuj plik package.json i package-lock.json
 COPY package*.json ./
 
-# Instaluj sharp dla systemu Linux
-RUN npm install sharp --platform=linuxmusl --arch=x64
+# Zainstaluj zależności
+RUN npm install --production
 
-# Zainstaluj pozostałe zależności
-RUN npm install
-
-# Skopiuj resztę plików
+# Skopiuj pozostałe pliki projektu
 COPY . .
 
-# Uruchom aplikację
-CMD ["npm", "run"]
+# Expose port
+EXPOSE 1337
+
+# Uruchom aplikację Strapi
+CMD ["npm", "start"]

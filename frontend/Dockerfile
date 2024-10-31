@@ -1,26 +1,29 @@
-# 1. Use the official Node.js image
-FROM node:20-alpine
+# Użyj oficjalnego obrazu Node.js jako podstawy
+FROM node:18 AS build
 
-# 2. Set the working directory inside the container
-WORKDIR /app
+# Ustaw katalog roboczy
+WORKDIR /usr/src/app
 
-# 3. Copy the package.json and package-lock.json files to the container
+# Skopiuj plik package.json i package-lock.json
 COPY package*.json ./
 
-# 4. Install dependencies
+# Zainstaluj zależności
 RUN npm install
 
-# 5. Copy the rest of the application code
+# Skopiuj pozostałe pliki projektu
 COPY . .
 
-# 6. Build the Angular application (production version)
-RUN npm run build
+# Zbuduj aplikację Angular
+RUN npm run build --prod
 
-# 7. Use a server to serve the files (e.g., http-server)
-RUN npm install -g http-server
+# Użyj oficjalnego serwera Nginx do serwowania aplikacji
+FROM nginx:alpine
 
-# 8. Expose the port (default 8080 or 4200)
-EXPOSE 8080
+# Skopiuj zbudowaną aplikację do katalogu serwera Nginx
+COPY --from=build /usr/src/app/dist/fbe-solutions /usr/share/nginx/html
 
-# 9. Run the server for the built application
-CMD ["http-server", "dist"]
+# Expose port
+EXPOSE 80
+
+# Uruchom serwer Nginx
+CMD ["nginx", "-g", "daemon off;"]
