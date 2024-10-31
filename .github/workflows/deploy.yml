@@ -13,11 +13,11 @@ jobs:
               uses: actions/checkout@v2
 
             - name: SSH and Deploy
-              uses: garygrossgarten/github-action-scp@release 
+              uses: webfactory/ssh-agent@v0.5.3
               with:
-                  host: ${{ secrets.VPS_IP }}
+                  remote: ${{ secrets.VPS_IP }}
                   username: ${{ secrets.VPS_USER }}
-                  key: ${{ secrets.VPS_PRIVATE_KEY }}
+                  privateKey: ${{ secrets.VPS_PRIVATE_KEY }}
                   script: |
                       cd /path/to/your/project  
                       docker-compose down
