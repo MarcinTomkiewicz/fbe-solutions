@@ -12,13 +12,15 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: SSH and Deploy
+            - name: Start SSH Agent
               uses: webfactory/ssh-agent@v0.5.3
               with:
-                  remote: ${{ secrets.VPS_IP }}
-                  username: ${{ secrets.VPS_USER }}
-                  privateKey: ${{ secrets.VPS_PRIVATE_KEY }}
-                  script: |
+                  ssh-private-key: ${{ secrets.VPS_PRIVATE_KEY }}
+
+            - name: SSH and run deployment commands
+              run: |
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
                       cd /path/to/your/project  
                       docker-compose down
                       docker-compose up -d --build
+                  EOF
