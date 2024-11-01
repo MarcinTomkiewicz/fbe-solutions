@@ -9,7 +9,9 @@
     "test": "ng test",
     "serve:ssr:fbe-solutions": "node dist/fbe-solutions/server/server.mjs",
     "all": "concurrently \"npm run start:backend\" \"ng serve\"",
-    "start:backend": "cd ../backend && npm run develop"
+    "start:backend": "cd ../backend && npm run develop",
+    "build:ssr": "ng build --prod && ng run fbe-solutions:server:production",
+    "serve:ssr": "node dist/fbe-solutions/server/main.js"
   },
   "private": true,
   "dependencies": {

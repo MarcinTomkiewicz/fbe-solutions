@@ -1,24 +1,27 @@
-# Etap 1: Budowanie aplikacji
+# Etap budowania aplikacji Angular SSR
 FROM node:18 AS build
 
 WORKDIR /usr/src/app
 
-# Instalacja zależności
+# Skopiuj pliki package.json i package-lock.json i zainstaluj zależności
 COPY package*.json ./
 RUN npm install
 
-# Skopiowanie kodu aplikacji i budowanie
+# Skopiuj pliki projektu i zbuduj wersję SSR
 COPY . .
-RUN npm run build --prod
+RUN npm run build:ssr
 
-# Etap 2: Uruchamianie aplikacji jako serwera Angular Universal
-FROM node:18
+# Drugi etap: Użyj Node.js do serwowania aplikacji SSR
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
-COPY --from=build /usr/src/app ./
 
-# Eksponowanie portu serwera Angular Universal
+# Skopiuj pliki z etapu budowania
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
+COPY --from=build /usr/src/app/node_modules /usr/src/app/node_modules
+
+# Expose port dla Node.js
 EXPOSE 4000
 
-# Uruchomienie serwera aplikacji Angular Universal
-CMD ["npm", "run", "serve:ssr"]
+# Uruchom serwer SSR
+CMD ["node", "dist/fbe-solutions/server/main.js"]
