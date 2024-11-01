@@ -3,6 +3,8 @@ services:
     build:
       context: ./backend  # Katalog backendu
     image: strapi-backend  # Nazwa obrazu dla backendu
+    env_file:
+      - .env
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_HOST: db
