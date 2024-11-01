@@ -12,30 +12,24 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Check Secrets Access
-        run: |
-          echo "VPS_IP is set to: ${{ secrets.VPS_IP }}"
-          echo "VPS_USERNAME is set to: ${{ secrets.VPS_USER }}"
       - name: Test SSH Connection
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
-          key: private_key.pem
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: echo "SSH connection successful!"
-            uname -a  # Wyświetla informacje o systemie
+            uname -a
 
       - name: Copy files to VPS
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: './*'  # Wybierz katalog lub pliki do skopiowania
-          remote: '/fbe-solutions'  # Docelowa ścieżka na VPS
+          local: './*'
+          remote: '/fbe-solutions'
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
           recursive: true
 
@@ -45,10 +39,9 @@ jobs:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
           script: |
-            cd /ścieżka/docelowa/na/serwerze
+            cd /fbe-solutions
             docker-compose down
             docker-compose up -d --build
 
@@ -58,7 +51,6 @@ jobs:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
           script: |
             echo "Deployment complete. Checking running containers:"
