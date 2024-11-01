@@ -14,15 +14,18 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "es2022",
     "module": "ES2022",
     "lib": [
-      "ES2022",
+      "es2022",
       "dom"
-    ]
+    ],
   },
+  "exclude": [
+    "**/*.spec.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
