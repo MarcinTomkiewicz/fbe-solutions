@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Buduj aplikację Strapi
-RUN npm run build  # Dodaj ten krok do budowy aplikacji
+RUN npm run build
 
 # Expose port
 EXPOSE 1337

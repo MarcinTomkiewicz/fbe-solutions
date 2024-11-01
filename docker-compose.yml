@@ -7,7 +7,7 @@ services:
       DATABASE_CLIENT: postgres
       DATABASE_HOST: db
       DATABASE_PORT: 5432
-      DATABASE_NAME: strapi_db
+      DATABASE_NAME: fbe-solutions_db  # Zmieniamy na fbe-solutions_db
       DATABASE_USERNAME: strapi_user
       DATABASE_PASSWORD: strapi_password
     depends_on:
@@ -31,7 +31,7 @@ services:
     environment:
       POSTGRES_USER: strapi_user  # Użytkownik bazy danych
       POSTGRES_PASSWORD: strapi_password  # Hasło bazy danych
-      POSTGRES_DB: strapi_db  # Nazwa bazy danych
+      POSTGRES_DB: fbe-solutions_db  # Zmieniamy na fbe-solutions_db
     volumes:
       - db_data:/var/lib/postgresql/data  # Trwały wolumen na dane bazy
     networks:
@@ -41,4 +41,4 @@ networks:
   fbe-solutions:  # Deklaracja sieci
 
 volumes:
-  db_data:  # Trwały wolumen na dane bazy
+  db_data:
