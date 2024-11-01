@@ -4,7 +4,7 @@ services:
     ports:
       - "8080:80"  # Eksport portu 80 na hoście
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Montowanie pliku konfiguracyjnego NGINX
+      - ./nginx:/etc/nginx
     networks:
       - fbe-solutions
 
