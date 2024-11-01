@@ -2,12 +2,12 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"  # Eksport portu 80 na hoście
+      - "8080:80"  # Eksport portu 80 na hoście
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf  # Montowanie pliku konfiguracyjnego NGINX
     networks:
       - fbe-solutions
-      
+
   backend:
     build:
       context: ./backend  # Katalog backendu
