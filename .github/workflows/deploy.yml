@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: "."
-          target: "/fbe-solutions"
+          target: "/home/debian/fbe-solutions"
 
       - name: Deploy Application
         uses: appleboy/ssh-action@master
