@@ -1,36 +1,63 @@
 name: Deploy to VPS
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2  # Krok 1: Klonowanie repozytorium
+  deploy:
+    name: Deploy project with debugging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-            - name: Copy files to VPS
-              uses: garygrossgarten/github-action-scp@release  # Użycie akcji do kopiowania plików
-              with:
-                  host: ${{ secrets.VPS_IP }}  # IP twojego VPS
-                  username: ${{ secrets.VPS_USER }}  # Użytkownik VPS
-                  privateKey: ${{ secrets.VPS_PRIVATE_KEY }}  # Klucz prywatny
-                  local: './*'  # Katalog źródłowy do skopiowania (wszystkie pliki w bieżącym katalogu)
-                  remote: '/fbe-solutions/'  # Docelowy katalog na VPS
-                  recursive: true  # Jeśli chcesz skopiować foldery rekurencyjnie
+      - name: Test SSH Connection - Check if SSH Key works
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          script: |
+            echo "SSH connection successful!"
+            uname -a  # Wyświetla informacje o systemie
 
-            - name: Setup SSH Agent
-              uses: webfactory/ssh-agent@v0.5.3  # Użycie akcji SSH
-              with:
-                  ssh-private-key: ${{ secrets.VPS_PRIVATE_KEY }}
+      - name: Copy files to VPS
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: './*'  # Wybierz katalog lub pliki do skopiowania
+          remote: '/fbe-solutions'  # Docelowa ścieżka na VPS
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          recursive: true
 
-            - name: SSH and Deploy
-              run: |  # Użycie 'run' do wykonania skryptu
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
-                  cd /fbe-solutions  # Zmiana katalogu na serwerze do skopiowanego folderu
-                  docker-compose down  # Zatrzymanie kontenerów
-                  docker-compose up -d --build  # Uruchomienie kontenerów w tle
-                  EOF
+      - name: Deploy Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          script: |
+            cd /ścieżka/docelowa/na/serwerze
+            docker-compose down
+            docker-compose up -d --build
+
+      - name: Confirm Deployment - Debugging
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: 22
+          script: |
+            echo "Deployment complete. Checking running containers:"
+            docker ps
