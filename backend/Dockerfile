@@ -8,10 +8,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Zainstaluj zależności
-RUN npm install --production
+RUN npm install
 
 # Skopiuj pozostałe pliki projektu
 COPY . .
+
+# Buduj aplikację Strapi
+RUN npm run build  # Dodaj ten krok do budowy aplikacji
 
 # Expose port
 EXPOSE 1337
