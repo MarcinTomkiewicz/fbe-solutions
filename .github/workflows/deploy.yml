@@ -15,7 +15,7 @@ jobs:
       - name: Check Secrets Access
         run: |
           echo "VPS_IP is set to: ${{ secrets.VPS_IP }}"
-          echo "VPS_USERNAME is set to: ${{ secrets.VPS_USERNAME }}"
+          echo "VPS_USERNAME is set to: ${{ secrets.VPS_USER }}"
       - name: Test SSH Connection
         uses: appleboy/ssh-action@master
         with:
