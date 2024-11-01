@@ -12,17 +12,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Test SSH Connection - Check if SSH Key works
+      - name: Check Secrets Access
+        run: |
+          echo "VPS_IP is set to: ${{ secrets.VPS_IP }}"
+          echo "VPS_USERNAME is set to: ${{ secrets.VPS_USERNAME }}"
+      - name: Test SSH Connection
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.VPS_USER }}
+          key: private_key.pem
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
-          script: |
-            echo "SSH connection successful!"
+          script: echo "SSH connection successful!"
             uname -a  # Wyświetla informacje o systemie
 
       - name: Copy files to VPS
@@ -31,7 +33,7 @@ jobs:
           local: './*'  # Wybierz katalog lub pliki do skopiowania
           remote: '/fbe-solutions'  # Docelowa ścieżka na VPS
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
+          username: ${{ secrets.VPS_USER }}
           privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
@@ -41,7 +43,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
+          username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
@@ -54,7 +56,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
+          username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: 22
