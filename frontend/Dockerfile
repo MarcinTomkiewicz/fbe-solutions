@@ -1,29 +1,24 @@
-# Użyj oficjalnego obrazu Node.js jako podstawy
+# Etap 1: Budowanie aplikacji
 FROM node:18 AS build
 
-# Ustaw katalog roboczy
 WORKDIR /usr/src/app
 
-# Skopiuj plik package.json i package-lock.json
+# Instalacja zależności
 COPY package*.json ./
-
-# Zainstaluj zależności
 RUN npm install
 
-# Skopiuj pozostałe pliki projektu
+# Skopiowanie kodu aplikacji i budowanie
 COPY . .
+RUN npm run build:ssr
 
-# Zbuduj aplikację Angular
-RUN npm run build --prod
+# Etap 2: Uruchamianie aplikacji jako serwera Angular Universal
+FROM node:18
 
-# Użyj oficjalnego serwera Nginx do serwowania aplikacji
-FROM nginx:alpine
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app ./
 
-# Skopiuj zbudowaną aplikację do katalogu serwera Nginx
-COPY --from=build /usr/src/app/dist/fbe-solutions /usr/share/nginx/html
+# Eksponowanie portu serwera Angular Universal
+EXPOSE 4000
 
-# Expose port
-EXPOSE 80
-
-# Uruchom serwer Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Uruchomienie serwera aplikacji Angular Universal
+CMD ["npm", "run", "serve:ssr"]
