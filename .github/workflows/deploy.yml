@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        
+      - name: List files in working directory
+        run: ls -la
+
       - name: Test SSH Connection
         uses: appleboy/ssh-action@master
         with:
@@ -19,13 +23,14 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: echo "SSH connection successful!"
+          script: |
+            echo "SSH connection successful!"
             uname -a
 
       - name: Copy files to VPS
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: './*'
+          local: './*'  # Upewnij się, że chcesz skopiować wszystkie pliki
           remote: '/fbe-solutions'
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USER }}
