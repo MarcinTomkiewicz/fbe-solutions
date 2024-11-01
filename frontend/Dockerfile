@@ -9,7 +9,7 @@ RUN npm install
 
 # Skopiowanie kodu aplikacji i budowanie
 COPY . .
-RUN npm run build:ssr
+RUN npm run build --prod
 
 # Etap 2: Uruchamianie aplikacji jako serwera Angular Universal
 FROM node:18
