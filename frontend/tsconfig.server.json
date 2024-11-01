@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "./dist/out-tsc/server",
+      "module": "commonjs",
+      "target": "es2016",
+      "types": ["node"],
+      "lib": ["es2017", "dom"],
+      "baseUrl": "./"
+    },
+    "angularCompilerOptions": {
+      "enableIvy": false
+    },
+    "include": [
+      "src/**/*.d.ts",
+      "src/**/*.ts"
+    ]
+  }
