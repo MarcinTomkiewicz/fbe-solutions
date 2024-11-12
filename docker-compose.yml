@@ -36,6 +36,7 @@ services:
       - "4200:80"  # Eksport portu 4200 na hosta
     networks:
       - fbe-solutions  # Przypisanie do sieci
+    command: ["node", "dist/fbe-solutions/server/main.js"]
 
   db:
     image: postgres:13  # Użycie obrazu PostgreSQL
