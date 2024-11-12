@@ -33,7 +33,7 @@ services:
       context: ./frontend  # Katalog frontendu
     image: angular-frontend  # Nazwa obrazu dla frontendu
     ports:
-      - "4200:4000"  # Eksport portu 4200 na hosta
+      - "4200:80"  # Eksport portu 4200 na hosta
     networks:
       - fbe-solutions  # Przypisanie do sieci
 
