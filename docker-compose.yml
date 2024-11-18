@@ -2,7 +2,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8080:80"  # Eksport portu 80 na hoście
+      - "8080:80" # Eksport portu 80 na hoście
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
@@ -10,43 +10,43 @@ services:
 
   backend:
     build:
-      context: ./backend  # Katalog backendu
-    image: strapi-backend  # Nazwa obrazu dla backendu
+      context: ./backend
+    image: strapi-backend
     env_file:
       - ./backend/.env
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_HOST: db
       DATABASE_PORT: 5432
-      DATABASE_NAME: fbe-solutions_db  # Zmieniamy na fbe-solutions_db
+      DATABASE_NAME: fbe-solutions_db
       DATABASE_USERNAME: strapi_user
       DATABASE_PASSWORD: strapi_password
     depends_on:
-      - db  # Umożliwia uruchomienie backendu po uruchomieniu bazy danych
-    ports:
-      - "1337:1337"  # Eksport portu 1337 na hosta
+      - db
     networks:
-      - fbe-solutions  # Przypisanie do sieci
+      - fbe-solutions
 
   frontend:
     build:
-      context: ./frontend  # Katalog frontendu
-    image: angular-frontend  # Nazwa obrazu dla frontendu
+      context: ./frontend
+    image: angular-frontend
     ports:
-      - "4200:80"  # Eksport portu 4200 na hosta
+      - "4000:4000"
     networks:
-      - fbe-solutions  # Przypisanie do sieci
+      - fbe-solutions
+    depends_on:
+      - backend
 
   db:
-    image: postgres:13  # Użycie obrazu PostgreSQL
+    image: postgres:13
     environment:
-      POSTGRES_USER: strapi_user  # Użytkownik bazy danych
-      POSTGRES_PASSWORD: strapi_password  # Hasło bazy danych
-      POSTGRES_DB: fbe-solutions_db  # Zmieniamy na fbe-solutions_db
+      POSTGRES_USER: strapi_user
+      POSTGRES_PASSWORD: strapi_password
+      POSTGRES_DB: fbe-solutions_db
     volumes:
-      - db_data:/var/lib/postgresql/data  # Trwały wolumen na dane bazy
+      - db_data:/var/lib/postgresql/data
     networks:
-      - fbe-solutions  # Przypisanie do sieci
+      - fbe-solutions
 
 networks:
   fbe-solutions:

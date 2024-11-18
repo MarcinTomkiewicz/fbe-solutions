@@ -1,27 +1,36 @@
-# Etap budowania aplikacji Angular SSR
-FROM node:18 AS build
+# Etap 1: Budowanie aplikacji Angular
+FROM node:18 AS builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Skopiuj pliki package.json i package-lock.json i zainstaluj zależności
-COPY package*.json ./
+# Kopiuj pliki package.json i package-lock.json
+COPY ./frontend/package*.json ./
+
+# Instalacja zależności
 RUN npm install
 
-# Skopiuj pliki projektu i zbuduj wersję SSR
-COPY . .
+# Kopiuj kod aplikacji
+COPY ./frontend/ ./
+
+# Buduj aplikację z SSR
 RUN npm run build:ssr
 
-# Drugi etap: Użyj Node.js do serwowania aplikacji SSR
-FROM node:18-alpine
+# Etap 2: Uruchamianie serwera SSR
+FROM node:18 AS server
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Skopiuj pliki z etapu budowania
-COPY --from=build /usr/src/app/dist /usr/src/app/dist
-COPY --from=build /usr/src/app/node_modules /usr/src/app/node_modules
+# Kopiuj wyniki budowania z poprzedniego etapu
+COPY --from=builder /app/dist /app/dist
 
-# Expose port dla Node.js
+# Kopiuj package.json dla zależności produkcyjnych
+COPY ./frontend/package*.json ./
+
+# Instalacja zależności produkcyjnych
+RUN npm install --production
+
+# Eksponowanie portu
 EXPOSE 4000
 
-# Uruchom serwer SSR
-CMD ["node", "dist/fbe-solutions/server/main.js"]
+# Uruchamianie serwera SSR
+CMD ["node", "dist/server/main.js"]
