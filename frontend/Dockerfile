@@ -20,11 +20,14 @@ FROM node:18 AS server
 
 WORKDIR /app
 
-# Kopiowanie wyników budowania z poprzedniego etapu
+# Kopiowanie wyniku budowania z etapu "builder"
 COPY --from=builder /app/dist /app/dist
 
+# Kopiowanie pliku package.json i package-lock.json
+COPY --from=builder /app/package*.json ./
+
 # Instalacja zależności produkcyjnych
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Eksponowanie portu
 EXPOSE 4000
