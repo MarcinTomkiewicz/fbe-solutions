@@ -25,7 +25,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist/fbe-solutions/browser/ /usr/share/nginx/html/
 
 # Skopiuj plik konfiguracyjny nginx, jeśli go posiadasz
-COPY ../nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Uruchom nginx w trybie foreground (żeby kontener się nie zamknął)
 CMD ["nginx", "-g", "daemon off;"]
