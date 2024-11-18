@@ -1,4 +1,4 @@
-# Etap 1: Budowanie aplikacji
+# Etap 1: Budowanie aplikacji Angular
 FROM node:18 AS builder
 
 WORKDIR /app
@@ -12,25 +12,20 @@ RUN npm install
 # Kopiowanie reszty kodu aplikacji
 COPY . .
 
-# Budowanie aplikacji z SSR
-RUN npm run build:ssr
+# Budowanie aplikacji Angular w trybie produkcyjnym
+RUN npm run build --prod
 
-# Etap 2: Uruchamianie serwera SSR
-FROM node:18 AS server
+# Etap 2: Serwowanie aplikacji Angular za pomocą Nginx
+FROM nginx:latest
 
-WORKDIR /app
+# Usuń domyślną stronę Nginx
+RUN rm -rf /usr/share/nginx/html/*
 
-# Kopiowanie wyniku budowania z etapu "builder"
-COPY --from=builder /app/dist /app/dist
+# Kopiowanie zbudowanej aplikacji Angular do katalogu nginx
+COPY --from=builder /app/dist/<nazwa-aplikacji>/ /usr/share/nginx/html/
 
-# Kopiowanie pliku package.json i package-lock.json
-COPY --from=builder /app/package*.json ./
+# Skopiuj plik konfiguracyjny nginx, jeśli go posiadasz
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Instalacja zależności produkcyjnych
-RUN npm install --omit=dev
-
-# Eksponowanie portu
-EXPOSE 4000
-
-# Uruchamianie serwera SSR
-CMD ["node", "dist/server/main.js"]
+# Uruchom nginx w trybie foreground (żeby kontener się nie zamknął)
+CMD ["nginx", "-g", "daemon off;"]
