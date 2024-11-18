@@ -1,18 +1,18 @@
-# Etap 1: Budowanie aplikacji Angular
+# Etap 1: Budowanie aplikacji
 FROM node:18 AS builder
 
 WORKDIR /app
 
-# Kopiuj pliki package.json i package-lock.json
-COPY ./frontend/package*.json ./
+# Kopiowanie plików konfiguracyjnych
+COPY package*.json ./
 
 # Instalacja zależności
 RUN npm install
 
-# Kopiuj kod aplikacji
-COPY ./frontend/ ./
+# Kopiowanie reszty kodu aplikacji
+COPY . .
 
-# Buduj aplikację z SSR
+# Budowanie aplikacji z SSR
 RUN npm run build:ssr
 
 # Etap 2: Uruchamianie serwera SSR
@@ -20,11 +20,8 @@ FROM node:18 AS server
 
 WORKDIR /app
 
-# Kopiuj wyniki budowania z poprzedniego etapu
+# Kopiowanie wyników budowania z poprzedniego etapu
 COPY --from=builder /app/dist /app/dist
-
-# Kopiuj package.json dla zależności produkcyjnych
-COPY ./frontend/package*.json ./
 
 # Instalacja zależności produkcyjnych
 RUN npm install --production
